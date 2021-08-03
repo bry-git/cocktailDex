@@ -18,7 +18,8 @@ SDI cohort 06 project number 1 - a pokedex of cocktails
 ## Target Audience:
 Bartenders and folks who make cocktails 
 
-## Problem Statement: As a bartender, I want to be able to look up recipes for cocktails, so that I can make cocktails without having to memorize the recipes and be able to quickly find the recipes. I also need to be able to suggest a cocktail based on the alcohol to a customer.
+## Problem Statement: 
+As a bartender, I want to be able to look up recipes for cocktails, so that I can make cocktails without having to memorize the recipes and be able to quickly find the recipes. I also need to be able to suggest a cocktail based on the alcohol to a customer.
 
 ## User Stories (25-30):
 - As a user I should land at a home page that displays a random list of cocktails to choose from by their picture and title
