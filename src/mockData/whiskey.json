@@ -1,0 +1,44 @@
+{
+  "drinks": [
+      {
+          "strDrink": "Algonquin",
+          "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/uwryxx1483387873.jpg",
+          "idDrink": "11020"
+      },
+      {
+          "strDrink": "Boston Sour",
+          "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/kxlgbi1504366100.jpg",
+          "idDrink": "11129"
+      },
+      {
+          "strDrink": "California Lemonade",
+          "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/q5z4841582484168.jpg",
+          "idDrink": "11205"
+      },
+      {
+          "strDrink": "Frisco Sour",
+          "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/acuvjz1582482022.jpg",
+          "idDrink": "11382"
+      },
+      {
+          "strDrink": "Imperial Fizz",
+          "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/zj1usl1504884548.jpg",
+          "idDrink": "11524"
+      },
+      {
+          "strDrink": "Japanese Fizz",
+          "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/37vzv11504884831.jpg",
+          "idDrink": "11558"
+      },
+      {
+          "strDrink": "New York Sour",
+          "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/61wgch1504882795.jpg",
+          "idDrink": "11844"
+      },
+      {
+          "strDrink": "Whiskey Sour",
+          "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/hbkfsh1589574990.jpg",
+          "idDrink": "11004"
+      }
+  ]
+}

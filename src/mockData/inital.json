@@ -1,0 +1,54 @@
+{
+  "drinks": [
+    {
+        "strDrink": "Long Island Tea",
+        "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/nkwr4c1606770558.jpg",
+        "idDrink": "11002"
+    },
+    {
+      "strDrink": "White Russian",
+      "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/vsrupw1472405732.jpg",
+      "idDrink": "12528"
+    },
+    {
+      "strDrink": "Whiskey Sour",
+      "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/hbkfsh1589574990.jpg",
+      "idDrink": "11004"
+    },
+    {
+      "strDrink": "Tequila Sunrise",
+      "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/quqyqp1480879103.jpg",
+      "idDrink": "13621"
+    },
+    {
+      "strDrink": "Gin And Tonic",
+      "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/z0omyp1582480573.jpg",
+      "idDrink": "11403"
+    },
+    {
+      "strDrink": "Rum Punch",
+      "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/wyrsxu1441554538.jpg",
+      "idDrink": "14978"
+    },
+    {
+      "strDrink": "Gin Fizz",
+      "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/drtihp1606768397.jpg",
+      "idDrink": "11410"
+    },
+    {
+      "strDrink": "Margarita",
+      "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg",
+      "idDrink": "11007"
+    },
+    {
+      "strDrink": "Screwdriver",
+      "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/8xnyke1504352207.jpg",
+      "idDrink": "12162"
+  },
+  {
+      "strDrink": "Singapore Sling",
+      "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/7dozeg1582578095.jpg",
+      "idDrink": "12214"
+  }
+  ]
+}
