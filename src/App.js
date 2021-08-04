@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import './App.css';
 import './components/NavBar'
 import { Switch, Route} from "react-router-dom";
@@ -14,7 +15,7 @@ function App() {
       <DataHandlerTestComponent />
       <Switch >
           <Route exact path="/" >
-            <DrinksComponent drinks={}/>
+            <DrinksComponent />
           </Route>
           <Route exact path="/drink/:drinkid">
             <DrinkComponent />
@@ -22,7 +23,6 @@ function App() {
           <Route exact path="/random">
           </Route>
       </Switch>
-
     </div>
   );
 }

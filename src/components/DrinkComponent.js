@@ -1,8 +1,10 @@
 import React, {} from "react"
 
-const DrinkComponent = () => {
+const DrinkComponent = (props) => {
+
   return (
-    <h1>Drink Component</h1>
+    <>
+    </>
   )
 }
 
