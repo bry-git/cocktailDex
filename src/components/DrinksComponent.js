@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react"
 import DataHandlerComponent from "../DataHandlerComponent";
+import './DrinksComponent.css'
+import { withRouter } from "react-router-dom";
+import DrinkPreview from "./DrinkPreview";
 
 
 const DrinksComponent = (props) => {
@@ -17,12 +20,14 @@ const DrinksComponent = (props) => {
       {isLoading ? (
         <div>loading...</div>
       ) : (
-        <div>
-          <h1>Drinks Component</h1>
-          {data.drinks.map((drink) => { return  <p>{drink.strDrink}</p>})}
+        <div className="drinks-component-root">
+            {data.drinks.map((drink, index) => {
+              return <DrinkPreview drink={drink} key={index} />
+            })}
         </div>
-        )}
-    </>  
-  )};
+      )}
+    </>
+  )
+};
 
-export default DrinksComponent
+export default withRouter(DrinksComponent)

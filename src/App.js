@@ -17,7 +17,7 @@ function App() {
           <Route exact path="/" >
             <DrinksComponent />
           </Route>
-          <Route exact path="/drink/:drinkid">
+          <Route exact path="/drink/:drinkid" >
             <DrinkComponent />
           </Route>
           <Route exact path="/random">
