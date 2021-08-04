@@ -82,4 +82,28 @@ describe('The DataHandlerComponent Utility Class', () => {
     //teardown
   })
 
+  it('Provides Mock Data From getDrinksByID EndPoint', async () => {
+    //setup
+    const dataHandler = new DataHandlerComponent();
+    //execute
+    const results = await dataHandler.getDrinksByID(11011);
+
+    expect(results.drinks).toHaveLength(1);
+    //assert
+
+    //teardown
+  })
+
+  // it('should throw an error if called with an invalid api mock drink id number', () =>
+  // {
+  //   const dataHandler = new DataHandlerComponent();
+  //     function drinkOctopus() {
+  //       try {
+  //         dataHandler.getDrinksByID(12000);
+  //       } catch (error) {
+  //         console.log('Request failed', error)
+  //       }
+  //     }
+  //     expect(drinkOctopus).toThrowError('invalid mock API ID');
+  //   })
 })
