@@ -5,8 +5,13 @@ const DataHandlerTestComponent = (props) => {
   
   useEffect(() => {
     const dataHandler = new DataHandlerComponent();
-    dataHandler.getDrinksPopular().then((data) => props.setData(data)).then(() => props.setIsLoading(false))
-  });
+    //dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
+    //dataHandler.getDrinksRandom().then((data) => setData(data)).then(() => setIsLoading(false))
+    dataHandler.getDrinkRandom().then((data) => setData(data)).then(() => setIsLoading(false))
+    //dataHandler.getIngredientsAll().then((data) => setData(data)).then(() => setIsLoading(false))
+    //dataHandler.getGlassesAll().then((data) => setData(data)).then(() => setIsLoading(false))
+    //dataHandler.getCategoriesAll().then((data) => setData(data)).then(() => setIsLoading(false))
+  }, []);
 
   const loadingText = () => {
     return (<div>Loading</div>)
