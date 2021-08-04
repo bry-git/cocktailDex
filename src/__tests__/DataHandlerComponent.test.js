@@ -94,6 +94,30 @@ describe('The DataHandlerComponent Utility Class', () => {
     //teardown
   })
 
+  it('Provides Mock Data From getDrinksBySearch EndPoint', async () => {
+    //setup
+    const dataHandler = new DataHandlerComponent();
+    //execute
+    const results = await dataHandler.getDrinksBySearch('margarita');
+
+    expect(results.drinks).toHaveLength(6);
+    //assert
+
+    //teardown
+  })
+
+  it('Provides Mock Data From getDrinksByIngredients EndPoint', async () => {
+    //setup
+    const dataHandler = new DataHandlerComponent();
+    //execute
+    const results = await dataHandler.getDrinksByIngredients(['vodka', 'gin']);
+
+    expect(results.drinks).toHaveLength(9);
+    //assert
+
+    //teardown
+  })
+
   // it('should throw an error if called with an invalid api mock drink id number', () =>
   // {
   //   const dataHandler = new DataHandlerComponent();

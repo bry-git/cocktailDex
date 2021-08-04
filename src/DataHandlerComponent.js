@@ -5,6 +5,8 @@ import * as getDrinksByFirstLetterJSON from './mockData/getDrinksByFirstLetter.j
 import * as getIngredientsAllJSON from './mockData/getIngredientsAll.json';
 import * as getGlassesAllJSON from './mockData/getGlassesAll.json';
 import * as getCategoriesAllJSON from './mockData/getCategoriesAll.json';
+import * as getDrinksBySearchJSON from './mockData/getDrinksBySearch.json';
+import * as getDrinksByIngredientsJSON from './mockData/getDrinksByIngredients.json';
 
 //get drink by ID imports
 import * as drink11000JSON from './mockData/drinks/11000.json';
@@ -35,6 +37,7 @@ class DataHandlerComponent {
     this.dev = dev;
   }
 
+  //utility function
   promiseInput = (input) => {
 	  //the input parameter is in scope to the below promise now
     return new Promise(function(resolve, reject)
@@ -42,6 +45,8 @@ class DataHandlerComponent {
       resolve(input);
     });
   }
+
+  //getDrinksAll Will Go Here
 
   getDrinksByID = async (drinkID) => {
     if (this.dev) {
@@ -120,23 +125,6 @@ class DataHandlerComponent {
     }
   }
 
-  getDrinksRandom = async () => {
-    if (this.dev) {
-      try {
-      return await this.promiseInput(getDrinksRandomJSON.default)
-    } catch (error) {
-      console.log('Request failed', error)
-    }
-    } else {
-      try {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/randomselection.php')
-      return await response.json()
-    } catch (error) {
-      console.log('Request failed', error)
-    }
-    }
-  }
-
   getDrinkRandom = async () => {
     if (this.dev) {
       try {
@@ -147,6 +135,23 @@ class DataHandlerComponent {
     } else {
       try {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/random.php')
+      return await response.json()
+    } catch (error) {
+      console.log('Request failed', error)
+    }
+    }
+  }
+
+  getDrinksRandom = async () => {
+    if (this.dev) {
+      try {
+      return await this.promiseInput(getDrinksRandomJSON.default)
+    } catch (error) {
+      console.log('Request failed', error)
+    }
+    } else {
+      try {
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/randomselection.php')
       return await response.json()
     } catch (error) {
       console.log('Request failed', error)
@@ -171,6 +176,29 @@ class DataHandlerComponent {
     }
   }
 
+  getDrinksBySearch = async (searchString) => {
+    if (this.dev) {
+      try {
+        if (!searchString) {
+          throw new Error('expects a non empty search string')
+        }
+      return await this.promiseInput(getDrinksBySearchJSON.default)
+    } catch (error) {
+      console.log('Request failed', error)
+    }
+    } else {
+      try {
+        if (!searchString) {
+          throw new Error('expects a non empty search string')
+        }
+      const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s=${searchString}`)
+      return await response.json()
+    } catch (error) {
+      console.log('Request failed', error)
+    }
+    }
+  }
+
   getIngredientsAll = async () => {
     if (this.dev) {
       try {
@@ -185,6 +213,35 @@ class DataHandlerComponent {
     } catch (error) {
       console.log('Request failed', error)
     }
+    }
+  }
+
+  getDrinksByIngredients = async (ingredients) => {
+    if (this.dev) {
+      try {
+        if (!ingredients || !Array.isArray(ingredients)) {
+          throw new Error('expects and array of strings of approved ingredients')
+        } else if (ingredients.length === 0) {
+          throw new Error('ingredients array cannot be empty')
+        }
+        return await this.promiseInput(getDrinksByIngredientsJSON.default)
+      } catch (error) {
+        console.log('Request failed', error)
+      }
+    } else {
+        try {
+          if (!ingredients || !Array.isArray(ingredients)) {
+            throw new Error('expects and array of strings of approved ingredients')
+          } else if (ingredients.length === 0) {
+            throw new Error('ingredients array cannot be empty')
+          }
+
+          const list = ingredients.join(",")
+          const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${list}`)
+          return await response.json()
+      } catch (error) {
+        console.log('Request failed', error)
+      }
     }
   }
 
@@ -221,6 +278,8 @@ class DataHandlerComponent {
     }
     }
   }
+
+
 }
 
 export default DataHandlerComponent
