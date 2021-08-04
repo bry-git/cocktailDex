@@ -1,11 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
+import DataHandlerTestComponent from './DataHandlerTestComponent';
 
 function App() {
   return (
     <div className="App">
-     
-     
+     <DataHandlerTestComponent />
+
     </div>
   );
 }
