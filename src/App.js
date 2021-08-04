@@ -7,16 +7,19 @@ import DrinkComponent from './components/DrinkComponent'
 import DataHandlerTestComponent from './DataHandlerTestComponent';
 
 function App() {
+
   return (
     <div className="App">
-      <DataHandlerTestComponent />
       <Navbar/>
+      <DataHandlerTestComponent />
       <Switch >
           <Route exact path="/" >
-            <DrinksComponent />
+            <DrinksComponent drinks={}/>
           </Route>
           <Route exact path="/drink/:drinkid">
             <DrinkComponent />
+          </Route>
+          <Route exact path="/random">
           </Route>
       </Switch>
 

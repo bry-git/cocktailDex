@@ -6,31 +6,35 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import { StylesProvider } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import useStyles from './NavBar.styles'
 import './NavBar.css'
 
 const Navbar = () => {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    return (
-     <StylesProvider injectFirst>
+  return (
+    <StylesProvider injectFirst>
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
 
-          <img src="../icons/cocktail-solid(1).svg"></img>
+            <img src="../icons/cocktail-solid(1).svg" alt=""></img>
 
             <Typography className={classes.title} variant="h6" noWrap>
-            <Link to="/">
-              CocktailDex
+              <Link to="/">
+                CocktailDex
               </Link>
             </Typography>
-            <Typography className={classes.title} variant="h6" noWrap>
-            <Link to="/drink/1">
-              Drink
+            <Typography className={classes.title} variant="h8" noWrap>
+              <Link to="/random">
+                Randomize
               </Link>
             </Typography>
+            {/* <Typography className={classes.title} variant="h8" noWrap>
+              <Link to="/drink/1">
+                Drink $MOVE-ME
+              </Link>
+            </Typography> */}
 
 
             <div className={classes.search}>
@@ -50,7 +54,7 @@ const Navbar = () => {
         </AppBar>
       </div>
     </StylesProvider>
-    );
-  }
+  );
+}
 
-  export default Navbar
+export default Navbar
