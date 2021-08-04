@@ -15,6 +15,16 @@ const DrinksComponent = (props) => {
     dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
   }, []);
 
+  const DrinkPreview = (data) => {
+    console.log(data);
+    return (
+      <div className="drink-preview">
+        <img src={data.drink.strDrinkThumb} alt=""></img>
+        <p>{data.drink.strDrink}</p>
+      </div>
+    )
+  }
+
   return (
     <>
       {isLoading ? (
