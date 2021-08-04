@@ -2,9 +2,7 @@ import React, {useState, useEffect} from "react"
 import DataHandlerComponent from './DataHandlerComponent';
 
 const DataHandlerTestComponent = (props) => {
-  const [ data, setData ] = useState([])
-  const [ isLoading, setIsLoading ] = useState(true)
-
+  
   useEffect(() => {
     const dataHandler = new DataHandlerComponent();
     //dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
@@ -24,7 +22,7 @@ const DataHandlerTestComponent = (props) => {
   }
 
   return (
-    isLoading ? loadingText() : outputText()
+    props.isLoading ? loadingText() : outputText()
   )
 
 }

@@ -1,8 +1,11 @@
 import React, {} from "react"
 
-const DrinkComponent = () => {
+const DrinkComponent = (props) => {
+  console.log('drink comp props: ', props)
   return (
-    <h1>Drink Component</h1>
+    <>
+    <p>{props.drink.strDrink}</p>
+    </>
   )
 }
 
