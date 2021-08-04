@@ -1,20 +1,33 @@
-import React, { } from "react"
-import DrinkComponent from "./DrinkComponent";
+import React, { useEffect, useState } from "react"
+import DataHandlerComponent from "../DataHandlerComponent";
+import './DrinksComponent.css'
+import { withRouter } from "react-router-dom";
+import DrinkPreview from "./DrinkPreview";
 
 
 const DrinksComponent = (props) => {
 
-  console.log(props)
-  if(props.isLoading) {
-    return <h1>Loading... please wait.</h1>
-  }
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const dataHandler = new DataHandlerComponent();
+    dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
+  }, []);
 
   return (
-        <div>
-          <h1>Drinks Component</h1>
-          {props.drinks.map((drink) => {return <DrinkComponent drink={drink}/>})}
+    <>
+      {isLoading ? (
+        <div>loading...</div>
+      ) : (
+        <div className="drinks-component-root">
+            {data.drinks.map((drink, index) => {
+              return <DrinkPreview drink={drink} key={index} />
+            })}
         </div>
-  );
+      )}
+    </>
+  )
 };
 
-export default DrinksComponent
+export default withRouter(DrinksComponent)
