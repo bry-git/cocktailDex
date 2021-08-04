@@ -9,24 +9,20 @@ import DataHandlerTestComponent from './DataHandlerTestComponent';
 
 function App() {
 
-  const [ data, setData ] = useState([])
-  const [ isLoading, setIsLoading ] = useState(true)
-
   return (
     <div className="App">
       <Navbar/>
-      <DataHandlerTestComponent setData={setData} setIsLoading={setIsLoading} isLoading={isLoading} />
+      <DataHandlerTestComponent />
       <Switch >
           <Route exact path="/" >
-            <DrinksComponent drinks={data.drinks} isLoading={isLoading} />
+            <DrinksComponent />
           </Route>
-          <Route exact path="/drink/:drinkid">
-            <DrinkComponent drinks={data} />
+          <Route exact path="/drink/:drinkid" >
+            <DrinkComponent />
           </Route>
           <Route exact path="/random">
           </Route>
       </Switch>
-
     </div>
   );
 }

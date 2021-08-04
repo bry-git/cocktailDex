@@ -1,12 +1,16 @@
 import React, {} from "react"
+import { withRouter } from "react-router-dom";
 
 const DrinkComponent = (props) => {
-  console.log('drink comp props: ', props)
+
+
+  //props.match.params.movieid
+
   return (
     <>
-    <p>{props.drink.strDrink}</p>
+      <p>drink component{props.match.params.drinkid}</p>
     </>
   )
 }
 
-export default DrinkComponent
+export default withRouter(DrinkComponent)
