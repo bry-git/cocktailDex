@@ -9,9 +9,10 @@ const DataHandlerTestComponent = (props) => {
     const dataHandler = new DataHandlerComponent();
     //dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
     //dataHandler.getDrinksRandom().then((data) => setData(data)).then(() => setIsLoading(false))
+    dataHandler.getDrinkRandom().then((data) => setData(data)).then(() => setIsLoading(false))
     //dataHandler.getIngredientsAll().then((data) => setData(data)).then(() => setIsLoading(false))
     //dataHandler.getGlassesAll().then((data) => setData(data)).then(() => setIsLoading(false))
-    dataHandler.getCategoriesAll().then((data) => setData(data)).then(() => setIsLoading(false))
+    //dataHandler.getCategoriesAll().then((data) => setData(data)).then(() => setIsLoading(false))
   }, []);
 
   const loadingText = () => {

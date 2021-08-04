@@ -1,5 +1,7 @@
 import * as getDrinksPopularJSON from './mockData/getDrinksPopular.json';
 import * as getDrinksRandomJSON from './mockData/getDrinksRandom.json';
+import * as getDrinkRandomJSON from './mockData/getDrinkRandom.json';
+import * as getDrinksByFirstLetterJSON from './mockData/getDrinksByFirstLetter.json';
 import * as getIngredientsAllJSON from './mockData/getIngredientsAll.json';
 import * as getGlassesAllJSON from './mockData/getGlassesAll.json';
 import * as getCategoriesAllJSON from './mockData/getCategoriesAll.json';
@@ -44,6 +46,40 @@ class DataHandlerComponent {
     } else {
       try {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/randomselection.php')
+      return await response.json()
+    } catch (error) {
+      console.log('Request failed', error)
+    }
+    }
+  }
+
+  getDrinkRandom = async () => {
+    if (this.dev) {
+      try {
+      return await this.promiseInput(getDrinkRandomJSON.default)
+    } catch (error) {
+      console.log('Request failed', error)
+    }
+    } else {
+      try {
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/random.php')
+      return await response.json()
+    } catch (error) {
+      console.log('Request failed', error)
+    }
+    }
+  }
+
+  getDrinksByFirstLetter = async (letter) => {
+    if (this.dev) {
+      try {
+      return await this.promiseInput(getDrinksByFirstLetterJSON.default)
+    } catch (error) {
+      console.log('Request failed', error)
+    }
+    } else {
+      try {
+      const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/search.php?f=${letter}`)
       return await response.json()
     } catch (error) {
       console.log('Request failed', error)

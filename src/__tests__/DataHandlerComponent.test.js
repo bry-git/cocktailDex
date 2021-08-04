@@ -59,4 +59,27 @@ describe('The DataHandlerComponent Utility Class', () => {
     expect(results.drinks).toHaveLength(11);
     //teardown
   })
+
+  it('Provides Mock Data From getDrinkRandom EndPoint', async () => {
+    //setup
+    const dataHandler = new DataHandlerComponent();
+    //execute
+    const results = await dataHandler.getDrinkRandom();
+    //console.log(JSON.stringify(results))
+    //assert
+    expect(results.drinks).toHaveLength(1);
+    //teardown
+  })
+
+  it('Provides Mock Data From getDrinksByFirstLetter EndPoint', async () => {
+    //setup
+    const dataHandler = new DataHandlerComponent();
+    //execute
+    const results = await dataHandler.getDrinksByFirstLetter('m');
+    //console.log(JSON.stringify(results))
+    //assert
+    expect(results.drinks).toHaveLength(32);
+    //teardown
+  })
+
 })
