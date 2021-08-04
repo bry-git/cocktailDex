@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
 import DataHandlerComponent from "../DataHandlerComponent";
+import './DrinksComponent.css'
+import { Link } from 'react-router-dom'
 
 
 const DrinksComponent = (props) => {
@@ -12,17 +14,30 @@ const DrinksComponent = (props) => {
     dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
   }, []);
 
+  const DrinkPreview = (data) => {
+    console.log(data);
+    return (
+      <div className="drink-preview">
+        <img src={data.drink.strDrinkThumb} alt=""></img>
+        <p>{data.drink.strDrink}</p>
+        {/* <Link to={"/drink/:drinkid"}></Link>  */}
+      </div>
+    )
+  }
+
   return (
     <>
       {isLoading ? (
         <div>loading...</div>
       ) : (
-        <div>
-          <h1>Drinks Component</h1>
-          {data.drinks.map((drink) => { return  <p>{drink.strDrink}</p>})}
+        <div className="drinks-component-root">
+            {data.drinks.map((drink, index) => {
+              return <DrinkPreview drink={drink} key={index} />
+            })}
         </div>
-        )}
-    </>  
-  )};
+      )}
+    </>
+  )
+};
 
 export default DrinksComponent

@@ -1,0 +1,32 @@
+.drink-component-root {
+    display: flex;
+    flex-direction: row;
+}
+
+.drink-preview {
+    display: inline-block;
+    max-width: 12em;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #1d3557;
+    border-radius: 6px;
+    margin: 15px;
+}
+
+.drink-preview > img {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+    
+}
+
+@media screen and (max-width: 400px) {
+    .drink-preview {
+        max-width: 7em;
+    }
+
+    .drink-preview > p {
+        font-size: 12px
+    }
+  }

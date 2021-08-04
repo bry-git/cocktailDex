@@ -20,7 +20,7 @@ const DataHandlerTestComponent = (props) => {
   }
 
   return (
-    props.isLoading ? loadingText() : outputText()
+    props.isLoading ? loadingText() : null
   )
 
 }
