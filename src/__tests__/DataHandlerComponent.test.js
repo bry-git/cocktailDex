@@ -34,7 +34,18 @@ describe('The DataHandlerComponent Utility Class', () => {
     const results = await dataHandler.getIngredientsAll();
     //console.log(JSON.stringify(results))
     //assert
-    expect(results.drinks).toHaveLength(488);
+    expect(results.drinks).toHaveLength(50);
+    //teardown
+  })
+
+  it('Provides Mock Data From getDrinksAll EndPoint', async () => {
+    //setup
+    const dataHandler = new DataHandlerComponent();
+    //execute
+    const results = await dataHandler.getDrinksAll();
+    //console.log(JSON.stringify(results))
+    //assert
+    expect(results.drinks).toHaveLength(50);
     //teardown
   })
 
@@ -75,18 +86,18 @@ describe('The DataHandlerComponent Utility Class', () => {
     //setup
     const dataHandler = new DataHandlerComponent();
     //execute
-    const results = await dataHandler.getDrinksByFirstLetter('m');
+    const results = await dataHandler.getDrinksByFirstLetter(0,50,'m');
     //console.log(JSON.stringify(results))
     //assert
     expect(results.drinks).toHaveLength(32);
     //teardown
   })
 
-  it('Provides Mock Data From getDrinksByID EndPoint', async () => {
+  it('Provides Mock Data From getDrinkByID EndPoint', async () => {
     //setup
     const dataHandler = new DataHandlerComponent();
     //execute
-    const results = await dataHandler.getDrinksByID(11011);
+    const results = await dataHandler.getDrinkByID(11011);
 
     expect(results.drinks).toHaveLength(1);
     //assert
@@ -98,7 +109,7 @@ describe('The DataHandlerComponent Utility Class', () => {
     //setup
     const dataHandler = new DataHandlerComponent();
     //execute
-    const results = await dataHandler.getDrinksBySearch('margarita');
+    const results = await dataHandler.getDrinksBySearch(0,50,'margarita');
 
     expect(results.drinks).toHaveLength(6);
     //assert
@@ -110,9 +121,21 @@ describe('The DataHandlerComponent Utility Class', () => {
     //setup
     const dataHandler = new DataHandlerComponent();
     //execute
-    const results = await dataHandler.getDrinksByIngredients(['vodka', 'gin']);
+    const results = await dataHandler.getDrinksByIngredients(0,50, ['vodka', 'gin']);
 
     expect(results.drinks).toHaveLength(9);
+    //assert
+
+    //teardown
+  })
+
+  it('Provides Mock Data From getDrinksByGlass EndPoint', async () => {
+    //setup
+    const dataHandler = new DataHandlerComponent();
+    //execute
+    const results = await dataHandler.getDrinksByGlass(0,50,'cocktail_glass');
+
+    expect(results.drinks).toHaveLength(50);
     //assert
 
     //teardown
