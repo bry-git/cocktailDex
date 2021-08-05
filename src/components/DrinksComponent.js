@@ -21,14 +21,18 @@ const DrinksComponent = (props) => {
     dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
   }, []);
 
+  //this use effect handles changes in the search query
   useEffect(() => {
     setIsLoading(true);
     const searchQuery = props.searchQuery;
+    const dataHandler = new DataHandlerComponent();
     if (searchQuery) {
-      const dataHandler = new DataHandlerComponent();
+
       dataHandler.getDrinksBySearch(0,50,props.searchQuery)
       .then((data) => setData(data))
       .then(() => setIsLoading(false))
+    } else {
+      dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
     }
   }, [props.searchQuery]);
 
