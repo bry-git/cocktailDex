@@ -1,0 +1,30 @@
+.details-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.details-image {
+    display: flex;
+    flex-direction: column;
+}
+
+.details-image > img {
+    width: 300px;
+    height: auto
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    text-align: unset;
+    margin: 0 1em 0 1em;
+}
+
+.ingredient-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.ingredient-container > div {
+    padding: 0 1em 0 1em;
+}

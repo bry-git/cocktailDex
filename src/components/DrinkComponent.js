@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from "react"
+import React, { useState, useEffect } from "react"
 import { withRouter } from "react-router-dom";
 import DataHandlerComponent from '../DataHandlerComponent';
+import './DrinkComponent.css'
 
 const DrinkComponent = (props) => {
-  const [ data, setData ] = useState([])
-  const [ isLoading, setIsLoading ] = useState(true)
 
-  //this use effect will load the drink data for you, the critical varaible is the second parameter to use effect
-  //anything in the second parameter array will cause a re-render of the given use effect.
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const dataHandler = new DataHandlerComponent();
     const drinkId = props.match.params.drinkid;
@@ -18,14 +18,56 @@ const DrinkComponent = (props) => {
     }
   }, [props.match.params.drinkid]);
 
-  //props.match.params.movieid
+  const DrinkDetailsPage = (props) => {
+
+      var ingredients = []
+
+      for(let i = 1; i <= 15; i++) {
+        if(props.drink[`strIngredient${i}`] == null) {
+          break;
+        }
+        ingredients.push(props.drink[`strIngredient${i}`])
+      }
+
+      var measures = []
+
+      for(let i = 1; i <= 15; i++) {
+        if(props.drink[`strMeasure${i}`] == null) {
+          break;
+        }
+        measures.push(props.drink[`strMeasure${i}`])
+      }
+
+      return(
+        <div className="details-container">
+          <div className="details-image">
+            <img src={props.drink.strDrinkThumb}></img>
+          </div>
+          <div className="details">
+            <h2>{props.drink.strDrink}</h2>
+            <p>Instructions: {props.drink.strInstructions}</p>
+            <div className="ingredient-container">
+            <div>Ingredients: {ingredients.map(ingredient => <p>{ingredient}</p>)}
+            </div>
+            <div>Measures: {measures.map(measure => <p>{measure}</p>)}</div>
+            </div>
+          </div>
+        </div>
+      )
+  }
 
   return (
     <>
       <p>drink component{props.match.params.drinkid}</p>
-      <p>{isLoading ? <p></p> : <div>{JSON.stringify(data.drinks[0])}</div>}</p>
-    </>
-  )
+      {isLoading ? ( <p>loading...</p>
+      ) : (
+        <div>
+          <DrinkDetailsPage drink={data.drinks[0]}/>
+          </div>)}
+      </>
+      )
 }
 
-export default withRouter(DrinkComponent)
+
+
+      export default withRouter(DrinkComponent)
