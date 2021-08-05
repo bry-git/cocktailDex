@@ -21,7 +21,9 @@ const RelatedDrinks = (props) => {
             ingredients.push(props.drink[`strIngredient${i}`])
         }
 
-        const dataHandler = new DataHandlerComponent(false);
+
+
+        const dataHandler = new DataHandlerComponent();
         dataHandler.getDrinksByIngredients(0, 50, ingredients)
             .then((data) => setData(data))
             .then(() => setIsLoading(false))
