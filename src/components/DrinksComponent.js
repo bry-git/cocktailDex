@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Pagination from 'material-ui/lab/Pagination';
 
 const DrinksComponent = (props) => {
   const [data, setData] = useState([])
@@ -61,7 +62,7 @@ const DrinksComponent = (props) => {
 
   const displayPagination = () => {
     return (
-      <p>pagination</p>
+      <Pagination count={10} variant="outlined" shape="rounded" />
     )
   }
 
