@@ -7,6 +7,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 const DrinksComponent = (props) => {
   const [data, setData] = useState([])
@@ -15,11 +16,14 @@ const DrinksComponent = (props) => {
   //handles data load based on props.displayMode
   // {mode: 'default', query: ''}
   // {mode: 'search', query: 'query'}
+  // {mode: 'randomize', query: ''}
   useEffect(() => {
     setIsLoading(true);
     const dataHandler = new DataHandlerComponent();
     const mode = props.displayMode.mode;
     const query = props.displayMode.query;
+    const offset = props.displayMode.offset;
+    const limit = props.displayMode.limit;
 
     switch (mode) {
       case 'default':
@@ -27,7 +31,7 @@ const DrinksComponent = (props) => {
         break;
       case 'search':
         if (query) {
-          dataHandler.getDrinksBySearch(0,50,query)
+          dataHandler.getDrinksBySearch(offset,limit,query)
           .then((data) => setData(data))
           .then(() => setIsLoading(false))
         } else {
@@ -37,10 +41,23 @@ const DrinksComponent = (props) => {
       case 'randomize':
         dataHandler.getDrinksRandom().then((data) => setData(data)).then(() => setIsLoading(false))
         break;
+      case 'firstletter':
+        dataHandler.getDrinksByFirstLetter(offset,limit,query).then((data) => setData(data)).then(() => setIsLoading(false))
+        break;
+      case 'mainingredient':
+        dataHandler.getDrinksByIngredients(offset,limit,query).then((data) => setData(data)).then(() => setIsLoading(false))
+        break;
       default:
         dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
     }
   }, [props.displayMode]);
+
+  const handleGetByFirstLetter = (query) => {
+    props.setDisplayModeCallback({mode: 'firstletter', query: query, limit: 25, offset: 0});
+  }
+  const handleGetByIngredient  = (query) => {
+    props.setDisplayModeCallback({mode: 'mainingredient', query: [query], limit: 25, offset: 0});
+  }
 
   const displayDrinks = () => {
     if (data.drinks === 'No Drinks Found') {
@@ -78,6 +95,14 @@ const DrinksComponent = (props) => {
         <div>loading...</div>
       ) : (
         <div className="drinks-component-root">
+          <div className="">
+            <Button variant="contained" color="primary" onClick={() => handleGetByFirstLetter('m')}>
+              Drinks that start with M
+            </Button>
+            <Button variant="contained" color="primary" onClick={() => handleGetByIngredient('vodka')}>
+              Vodka Drinks
+            </Button>
+          </div>
             {displayDrinks()}
         </div>
       )}

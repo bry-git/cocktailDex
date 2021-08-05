@@ -1,4 +1,4 @@
-import  React, {useState} from 'react';
+import  React, {useState, useEffect} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -23,21 +23,25 @@ const Navbar = (props) => {
   }
   const handleSearchClick = () => {
     //props.setSearchCallback(searchQuery);
-    props.setDisplayModeCallback({mode: 'search', query: searchQuery});
+    props.setDisplayModeCallback({mode: 'search', query: searchQuery, limit: 50, offset: 0});
     history.push(`/`);
   }
 
   const handleRandomizeClick = () => {
     //props.setSearchCallback('');
-    props.setDisplayModeCallback({mode: 'randomize', query: ''});
+    props.setDisplayModeCallback({mode: 'randomize', query: '', limit: 50, offset: 0});
     history.push(`/`);
   }
 
   const handleLogoClick = () => {
     //props.setSearchCallback('');
-    props.setDisplayModeCallback({mode: 'default', query: ''});
+    props.setDisplayModeCallback({mode: 'default', query: '', limit: 50, offset: 0});
     history.push(`/`);
   }
+
+  useEffect(() => {
+    setSearchQuery(props.displayMode.query)
+  }, [props.displayMode]);
 
   return (
     <StylesProvider injectFirst>

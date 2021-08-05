@@ -10,15 +10,15 @@ import DataHandlerTestComponent from './DataHandlerTestComponent';
 function App() {
   // {mode: 'default', query: ''}
   // {mode: 'search', query: 'query'}
-  const [displayMode, setDisplayMode] = useState({mode: 'default', query: ''});
+  const [displayMode, setDisplayMode] = useState({mode: 'default', query: '', limit: 50, offset: 0});
 
   return (
     <div className="App">
-      <Navbar setDisplayModeCallback={(data) => setDisplayMode(data)} />
+      <Navbar displayMode={displayMode} setDisplayModeCallback={(data) => setDisplayMode(data)} />
       <DataHandlerTestComponent />
       <Switch >
           <Route exact path="/" >
-            <DrinksComponent displayMode={displayMode} />
+            <DrinksComponent displayMode={displayMode} setDisplayModeCallback={(data) => setDisplayMode(data)} />
           </Route>
           <Route exact path="/drink/:drinkid" >
             <DrinkComponent />
