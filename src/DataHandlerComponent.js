@@ -70,7 +70,7 @@ class DataHandlerComponent {
     let outputData = {};
     let outputDrinks
 
-    if (!inputData || !inputData.drinks) {
+    if (!inputData || !inputData.drinks || inputData === undefined) {
       outputDrinks = 'No Drinks Found'
     } else {
       inputCount = inputData.drinks.length;
