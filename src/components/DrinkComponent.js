@@ -12,7 +12,7 @@ const DrinkComponent = (props) => {
     const dataHandler = new DataHandlerComponent();
     const drinkId = props.match.params.drinkid;
     if (drinkId) {
-      dataHandler.getDrinkByID(11000)
+      dataHandler.getDrinkByID(parseInt(drinkId))
         .then((data) => setData(data))
         .then(() => setIsLoading(false))
     }

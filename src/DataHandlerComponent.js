@@ -155,7 +155,7 @@ class DataHandlerComponent {
           case 11022:
             return await this.promiseInput(drink11022JSON.default)
           default:
-            throw new Error('invalid mock API ID');
+            return await this.promiseInput(drink11000JSON.default)
         }
     } catch (error) {
       console.log('Drink ID not in mock API', error)
