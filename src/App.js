@@ -8,14 +8,15 @@ import DrinkComponent from './components/DrinkComponent'
 import DataHandlerTestComponent from './DataHandlerTestComponent';
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState('');
 
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar setSearchCallback={(data) => setSearchQuery(data)}/>
       <DataHandlerTestComponent />
       <Switch >
           <Route exact path="/" >
-            <DrinksComponent />
+            <DrinksComponent searchQuery={searchQuery}/>
           </Route>
           <Route exact path="/drink/:drinkid" >
             <DrinkComponent />

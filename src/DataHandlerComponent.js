@@ -55,11 +55,7 @@ class DataHandlerComponent {
       throw new Error('inputoffset and inputlimit must be positive integers')
     }
 
-    if (!inputData || !inputData.drinks) {
-      throw new Error('inputData must exist and include drinks key')
-    }
-
-    let inputCount = inputData.drinks.length;
+    let inputCount = 0;
     let currentData = {offset: inputOffset, limit: inputLimit}
 
     let nextOffset = inputLimit + inputOffset
@@ -72,7 +68,14 @@ class DataHandlerComponent {
 
     //prepare output
     let outputData = {};
-    let outputDrinks = inputData.drinks.slice(inputOffset, nextOffset)
+    let outputDrinks
+
+    if (!inputData || !inputData.drinks) {
+      outputDrinks = 'No Drinks Found'
+    } else {
+      inputCount = inputData.drinks.length;
+      outputDrinks = inputData.drinks.slice(inputOffset, nextOffset)
+    }
 
     if (nextOffset > inputCount) {
       nextData = 'null';
