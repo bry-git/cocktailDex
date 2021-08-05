@@ -8,9 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
-
 const DrinksComponent = (props) => {
-
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
