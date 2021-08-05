@@ -6,6 +6,7 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
+import Button from '@material-ui/core/Button';
 import { StylesProvider } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import useStyles from './NavBar.styles'
@@ -21,12 +22,20 @@ const Navbar = (props) => {
     setSearchQuery(event.target.value);
   }
   const handleSearchClick = () => {
-    props.setSearchCallback(searchQuery);
+    //props.setSearchCallback(searchQuery);
+    props.setDisplayModeCallback({mode: 'search', query: searchQuery});
+    history.push(`/`);
+  }
+
+  const handleRandomizeClick = () => {
+    //props.setSearchCallback('');
+    props.setDisplayModeCallback({mode: 'randomize', query: ''});
     history.push(`/`);
   }
 
   const handleLogoClick = () => {
-    props.setSearchCallback('');
+    //props.setSearchCallback('');
+    props.setDisplayModeCallback({mode: 'default', query: ''});
     history.push(`/`);
   }
 
@@ -38,15 +47,17 @@ const Navbar = (props) => {
           <IconButton color="inherit" onClick={handleLogoClick}>
             <LocalBarIcon />
           </IconButton>
-            <Typography className={classes.title} variant="h6" onClick={handleLogoClick} noWrap>
+          <Button color="inherit" className={classes.title} variant="h6" onClick={handleLogoClick}>CocktailDex</Button>
+            {/* <Typography className={classes.title} variant="h6" onClick={handleLogoClick} noWrap>
                 CocktailDex
-            </Typography>
+            </Typography> */}
+            <Button color="inherit" className={classes.title} variant="h8" onClick={handleRandomizeClick}>Randomize</Button>
 
-            <Typography className={classes.title} variant="h8" noWrap>
+            {/* <Typography className={classes.title} variant="h8" noWrap>
               <Link to="/random">
                 Randomize
               </Link>
-            </Typography>
+            </Typography> */}
             {/* <Typography className={classes.title} variant="h8" noWrap>
               <Link to="/drink/1">
                 Drink $MOVE-ME

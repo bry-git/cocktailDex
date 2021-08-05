@@ -12,27 +12,35 @@ const DrinksComponent = (props) => {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
-  //this loads getDrinksPopular (the default load)
+  //handles data load based on props.displayMode
+  // {mode: 'default', query: ''}
+  // {mode: 'search', query: 'query'}
   useEffect(() => {
     setIsLoading(true);
     const dataHandler = new DataHandlerComponent();
-    dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
-  }, []);
+    const mode = props.displayMode.mode;
+    const query = props.displayMode.query;
 
-  //this use effect handles changes in the search query
-  useEffect(() => {
-    setIsLoading(true);
-    const searchQuery = props.searchQuery;
-    const dataHandler = new DataHandlerComponent();
-    if (searchQuery) {
-
-      dataHandler.getDrinksBySearch(0,50,props.searchQuery)
-      .then((data) => setData(data))
-      .then(() => setIsLoading(false))
-    } else {
-      dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
+    switch (mode) {
+      case 'default':
+        dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
+        break;
+      case 'search':
+        if (query) {
+          dataHandler.getDrinksBySearch(0,50,query)
+          .then((data) => setData(data))
+          .then(() => setIsLoading(false))
+        } else {
+          dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
+        }
+        break;
+      case 'randomize':
+        dataHandler.getDrinksRandom().then((data) => setData(data)).then(() => setIsLoading(false))
+        break;
+      default:
+        dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
     }
-  }, [props.searchQuery]);
+  }, [props.displayMode]);
 
   const displayDrinks = () => {
     if (data.drinks === 'No Drinks Found') {
