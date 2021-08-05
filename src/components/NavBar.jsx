@@ -5,13 +5,16 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
+import LocalBarIcon from '@material-ui/icons/LocalBar';
 import Button from '@material-ui/core/Button';
 import { StylesProvider } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import useStyles from './NavBar.styles'
+import {useHistory} from 'react-router-dom'
 import './NavBar.css'
 
 const Navbar = (props) => {
+  const history = useHistory()
   const [searchQuery, setSearchQuery] = useState('');
   const classes = useStyles();
   const handleSearchInputChange = (event) => {
@@ -19,7 +22,21 @@ const Navbar = (props) => {
     setSearchQuery(event.target.value);
   }
   const handleSearchClick = () => {
-    props.setSearchCallback(searchQuery);
+    //props.setSearchCallback(searchQuery);
+    props.setDisplayModeCallback({mode: 'search', query: searchQuery});
+    history.push(`/`);
+  }
+
+  const handleRandomizeClick = () => {
+    //props.setSearchCallback('');
+    props.setDisplayModeCallback({mode: 'randomize', query: ''});
+    history.push(`/`);
+  }
+
+  const handleLogoClick = () => {
+    //props.setSearchCallback('');
+    props.setDisplayModeCallback({mode: 'default', query: ''});
+    history.push(`/`);
   }
 
   return (
@@ -27,33 +44,34 @@ const Navbar = (props) => {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-
-            <img src="../icons/cocktail-solid(1).svg" alt=""></img>
-
-            <Typography className={classes.title} variant="h6" noWrap>
-              <Link to="/">
+          <IconButton color="inherit" onClick={handleLogoClick}>
+            <LocalBarIcon />
+          </IconButton>
+          <Button color="inherit" className={classes.title} variant="h6" onClick={handleLogoClick}>CocktailDex</Button>
+            {/* <Typography className={classes.title} variant="h6" onClick={handleLogoClick} noWrap>
                 CocktailDex
-              </Link>
-            </Typography>
-            <Typography className={classes.title} variant="h8" noWrap>
+            </Typography> */}
+            <Button color="inherit" className={classes.title} variant="h8" onClick={handleRandomizeClick}>Randomize</Button>
+
+            {/* <Typography className={classes.title} variant="h8" noWrap>
               <Link to="/random">
                 Randomize
               </Link>
-            </Typography>
+            </Typography> */}
             {/* <Typography className={classes.title} variant="h8" noWrap>
               <Link to="/drink/1">
                 Drink $MOVE-ME
               </Link>
             </Typography> */}
 
-            <IconButton onClick={handleSearchClick}>
+            <IconButton color="inherit" onClick={handleSearchClick}>
                     <SearchIcon />
             </IconButton>
             <div className={classes.search}>
-              <div className={classes.searchIcon}>
+              {/* <div className={classes.searchIcon}> */}
                 {/*TODO: fix this search button in the search bar something really wrong*/}
-                    <SearchIcon />
-              </div>
+                    {/* <SearchIcon /> */}
+              {/* </div> */}
               <InputBase
                 placeholder="Search…"
                 classes={{

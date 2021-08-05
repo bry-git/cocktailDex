@@ -8,15 +8,17 @@ import DrinkComponent from './components/DrinkComponent'
 import DataHandlerTestComponent from './DataHandlerTestComponent';
 
 function App() {
-  const [searchQuery, setSearchQuery] = useState('');
+  // {mode: 'default', query: ''}
+  // {mode: 'search', query: 'query'}
+  const [displayMode, setDisplayMode] = useState({mode: 'default', query: ''});
 
   return (
     <div className="App">
-      <Navbar setSearchCallback={(data) => setSearchQuery(data)}/>
+      <Navbar setDisplayModeCallback={(data) => setDisplayMode(data)} />
       <DataHandlerTestComponent />
       <Switch >
           <Route exact path="/" >
-            <DrinksComponent searchQuery={searchQuery}/>
+            <DrinksComponent displayMode={displayMode} />
           </Route>
           <Route exact path="/drink/:drinkid" >
             <DrinkComponent />
