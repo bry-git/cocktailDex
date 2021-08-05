@@ -23,19 +23,10 @@ const DrinkComponent = (props) => {
       var ingredients = []
 
       for(let i = 1; i <= 15; i++) {
-        if(props.drink[`strIngredient${i}`] == null) {
+        if(props.drink[`strIngredient${i}`] == null || props.drink[`strMeasure${i}`] == null) {
           break;
         }
-        ingredients.push(props.drink[`strIngredient${i}`])
-      }
-
-      var measures = []
-
-      for(let i = 1; i <= 15; i++) {
-        if(props.drink[`strMeasure${i}`] == null) {
-          break;
-        }
-        measures.push(props.drink[`strMeasure${i}`])
+        ingredients.push(<tr><td>{props.drink[`strIngredient${i}`]}</td><td>{props.drink[`strMeasure${i}`]}</td></tr>)
       }
 
       return(
@@ -45,11 +36,14 @@ const DrinkComponent = (props) => {
           </div>
           <div className="details">
             <h2>{props.drink.strDrink}</h2>
-            <p>Instructions: {props.drink.strInstructions}</p>
+            <p><b>Category: </b>{props.drink.strCategory}</p>
+            <p><b>Tags:</b> {props.drink.strTags}</p>
+            <p><b>Instructions:</b> {props.drink.strInstructions}</p>
             <div className="ingredient-container">
-            <div>Ingredients: {ingredients.map(ingredient => <p>{ingredient}</p>)}
-            </div>
-            <div>Measures: {measures.map(measure => <p>{measure}</p>)}</div>
+            <table>
+              <tr><th>Ingredients</th><th>Measures</th></tr>
+              {ingredients}
+            </table>
             </div>
           </div>
         </div>
@@ -58,7 +52,6 @@ const DrinkComponent = (props) => {
 
   return (
     <>
-      <p>drink component{props.match.params.drinkid}</p>
       {isLoading ? ( <p>loading...</p>
       ) : (
         <div>

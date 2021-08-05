@@ -1,16 +1,19 @@
 .details-container {
     display: flex;
     flex-direction: row;
+    margin: 1em 0 0 0
 }
 
 .details-image {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .details-image > img {
     width: 300px;
-    height: auto
+    height: auto;
+    margin: 0 1em 0 1em 
 }
 
 .details {
@@ -28,3 +31,58 @@
 .ingredient-container > div {
     padding: 0 1em 0 1em;
 }
+
+p {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+table {
+    border-width: 1px;
+    border-color: #AAAAAA;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+th {
+    background-color: #AAAAAA;
+    border-width: 1px;
+    border-color: #AAAAAA;
+    border-style: solid;
+    border-radius: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+td {
+    border-width: 1px;
+    border-color: #CCCCCC;
+    border-style: solid;
+    border-radius: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+@media screen and (max-width: 400px) {
+    .details-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .details-image {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ingredient-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}    

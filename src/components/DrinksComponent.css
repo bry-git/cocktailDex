@@ -1,6 +1,8 @@
 .drink-component-root {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .drink-preview {
@@ -24,7 +26,7 @@
 
 @media screen and (max-width: 400px) {
   .drink-preview {
-      max-width: 7em;
+      max-width: 9em;
   }
 
   .drink-preview > p {
