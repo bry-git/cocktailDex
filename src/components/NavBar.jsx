@@ -39,6 +39,10 @@ const Navbar = (props) => {
     history.push(`/`);
   }
 
+  const handleGetByIngredient  = (query) => {
+    props.setDisplayModeCallback({mode: 'mainingredient', query: [query], limit: 50, offset: 0});
+  }
+
   useEffect(() => {
     setSearchQuery(props.displayMode.query)
   }, [props.displayMode]);
@@ -56,7 +60,9 @@ const Navbar = (props) => {
                 CocktailDex
             </Typography> */}
             <Button color="inherit" className={classes.title} variant="h8" onClick={handleRandomizeClick}>Randomize</Button>
-
+            <Button variant="contained" color="primary" onClick={() => handleGetByIngredient('vodka')}>
+              Vodka Drinks
+            </Button>
             {/* <Typography className={classes.title} variant="h8" noWrap>
               <Link to="/random">
                 Randomize

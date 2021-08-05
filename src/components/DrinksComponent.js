@@ -59,6 +59,12 @@ const DrinksComponent = (props) => {
     props.setDisplayModeCallback({mode: 'mainingredient', query: [query], limit: 25, offset: 0});
   }
 
+  const displayPagination = () => {
+    return (
+      <p>pagination</p>
+    )
+  }
+
   const displayDrinks = () => {
     if (data.drinks === 'No Drinks Found') {
       return (
@@ -96,14 +102,20 @@ const DrinksComponent = (props) => {
       ) : (
         <div className="drinks-component-root">
           <div className="">
-            <Button variant="contained" color="primary" onClick={() => handleGetByFirstLetter('m')}>
+            {/* TODO Turn this into a drop down for all the letters of the alphabet */}
+            {/* <Button variant="contained" color="primary" onClick={() => handleGetByFirstLetter('m')}>
               Drinks that start with M
-            </Button>
-            <Button variant="contained" color="primary" onClick={() => handleGetByIngredient('vodka')}>
+            </Button> */}
+            {/* TODO Turn this into a drop down for all the main ingredients */}
+            {/* Cognac, Tequila, Rum, Vodka, Whiskey, Gin, Bourbon */}
+            {/* <Button variant="contained" color="primary" onClick={() => handleGetByIngredient('vodka')}>
               Vodka Drinks
-            </Button>
+            </Button> */}
           </div>
             {displayDrinks()}
+            <div className="">
+            {displayPagination()}
+          </div>
         </div>
       )}
     </>
