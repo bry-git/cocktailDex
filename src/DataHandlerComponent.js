@@ -2,7 +2,9 @@ import * as getDrinksPopularJSON from './mockData/getDrinksPopular.json';
 import * as getDrinksRandomJSON from './mockData/getDrinksRandom.json';
 import * as getDrinkRandomJSON from './mockData/getDrinkRandom.json';
 import * as getDrinksByFirstLetterJSON from './mockData/getDrinksByFirstLetter.json';
+import * as getDrinksByGlassJSON from './mockData/getDrinksByGlass.json';
 import * as getIngredientsAllJSON from './mockData/getIngredientsAll.json';
+import * as getDrinksAllJSON from './mockData/getDrinksAll.json';
 import * as getGlassesAllJSON from './mockData/getGlassesAll.json';
 import * as getCategoriesAllJSON from './mockData/getCategoriesAll.json';
 import * as getDrinksBySearchJSON from './mockData/getDrinksBySearch.json';
@@ -46,9 +48,69 @@ class DataHandlerComponent {
     });
   }
 
-  //getDrinksAll Will Go Here
+    //utility function
+  paginateData = (inputData, inputOffset=0, inputLimit=50) => {
 
-  getDrinksByID = async (drinkID) => {
+    if (inputOffset < 0 || isNaN(inputOffset) || inputLimit < 0 || isNaN(inputLimit)) {
+      throw new Error('inputoffset and inputlimit must be positive integers')
+    }
+
+    if (!inputData || !inputData.drinks) {
+      throw new Error('inputData must exist and include drinks key')
+    }
+
+    let inputCount = inputData.drinks.length;
+    let currentData = {offset: inputOffset, limit: inputLimit}
+
+    let nextOffset = inputLimit + inputOffset
+    let nextLimit = inputLimit
+    let nextData = {offset: nextOffset, limit: nextLimit}
+
+    let previousOffset = inputOffset - inputLimit
+    let previousLimit = inputLimit
+    let previousData = {offset: previousOffset, limit: previousLimit}
+
+    //prepare output
+    let outputData = {};
+    let outputDrinks = inputData.drinks.slice(inputOffset, nextOffset)
+
+    if (nextOffset > inputCount) {
+      nextData = 'null';
+    }
+    if (previousOffset < 0) {
+      previousData = 'null';
+    }
+
+    //add pagination variables to data
+    outputData['drinks'] = outputDrinks;
+    outputData['count'] = inputCount;
+    outputData['current'] = currentData;
+    outputData['next'] = nextData;
+    outputData['previous'] = previousData;
+    return outputData;
+  }
+
+  //getDrinksAll Will Go Here
+  getDrinksAll = async (offset=0,limit=50) => {
+    if (this.dev) {
+      try {
+      return await this.promiseInput(getDrinksAllJSON.default)
+        .then((data) => this.paginateData(data,offset,limit))
+    } catch (error) {
+      console.log('Request failed', error)
+    }
+    } else {
+      try {
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s=')
+      return await response.json()
+      .then((data) => this.paginateData(data,offset,limit))
+    } catch (error) {
+      console.log('Request failed', error)
+    }
+    }
+  }
+
+  getDrinkByID = async (drinkID) => {
     if (this.dev) {
       try {
         switch(drinkID) {
@@ -108,10 +170,11 @@ class DataHandlerComponent {
     }
   }
 
-  getDrinksPopular = async () => {
+  getDrinksPopular = async (offset=0,limit=50) => {
     if (this.dev) {
       try {
       return await this.promiseInput(getDrinksPopularJSON.default)
+      .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
@@ -119,16 +182,18 @@ class DataHandlerComponent {
       try {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/popular.php')
       return await response.json()
+        .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
     }
   }
 
-  getDrinkRandom = async () => {
+  getDrinkRandom = async (offset=0,limit=50) => {
     if (this.dev) {
       try {
       return await this.promiseInput(getDrinkRandomJSON.default)
+        .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
@@ -136,16 +201,18 @@ class DataHandlerComponent {
       try {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/random.php')
       return await response.json()
+        .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
     }
   }
 
-  getDrinksRandom = async () => {
+  getDrinksRandom = async (offset=0,limit=50) => {
     if (this.dev) {
       try {
       return await this.promiseInput(getDrinksRandomJSON.default)
+      .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
@@ -153,16 +220,21 @@ class DataHandlerComponent {
       try {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/randomselection.php')
       return await response.json()
+      .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
     }
   }
 
-  getDrinksByFirstLetter = async (letter) => {
+  getDrinksByFirstLetter = async (offset=0,limit=50,letter) => {
     if (this.dev) {
       try {
+        if (!letter) {
+          throw new Error('expects a non empty letter')
+        }
       return await this.promiseInput(getDrinksByFirstLetterJSON.default)
+      .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
@@ -170,19 +242,21 @@ class DataHandlerComponent {
       try {
       const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/search.php?f=${letter}`)
       return await response.json()
+      .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
     }
   }
 
-  getDrinksBySearch = async (searchString) => {
+  getDrinksBySearch = async (offset=0,limit=50, searchString) => {
     if (this.dev) {
       try {
         if (!searchString) {
           throw new Error('expects a non empty search string')
         }
       return await this.promiseInput(getDrinksBySearchJSON.default)
+      .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
@@ -193,16 +267,43 @@ class DataHandlerComponent {
         }
       const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s=${searchString}`)
       return await response.json()
+      .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
     }
   }
 
-  getIngredientsAll = async () => {
+  getDrinksByGlass = async (offset=0,limit=50, glassString) => {
+    if (this.dev) {
+      try {
+        if (!glassString) {
+          throw new Error('expects a non empty search string')
+        }
+      return await this.promiseInput(getDrinksByGlassJSON.default)
+      .then((data) => this.paginateData(data,offset,limit))
+    } catch (error) {
+      console.log('Request failed', error)
+    }
+    } else {
+      try {
+        if (!glassString) {
+          throw new Error('expects a non empty search string')
+        }
+      const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?g=${glassString}`)
+      return await response.json()
+      .then((data) => this.paginateData(data,offset,limit))
+    } catch (error) {
+      console.log('Request failed', error)
+    }
+    }
+  }
+
+  getIngredientsAll = async (offset=0,limit=50) => {
     if (this.dev) {
       try {
       return await this.promiseInput(getIngredientsAllJSON.default)
+        .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
@@ -210,13 +311,14 @@ class DataHandlerComponent {
       try {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/list.php?i=list')
       return await response.json()
+      .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
     }
   }
 
-  getDrinksByIngredients = async (ingredients) => {
+  getDrinksByIngredients = async (offset=0,limit=50,ingredients) => {
     if (this.dev) {
       try {
         if (!ingredients || !Array.isArray(ingredients)) {
@@ -225,6 +327,7 @@ class DataHandlerComponent {
           throw new Error('ingredients array cannot be empty')
         }
         return await this.promiseInput(getDrinksByIngredientsJSON.default)
+        .then((data) => this.paginateData(data,offset,limit))
       } catch (error) {
         console.log('Request failed', error)
       }
@@ -239,16 +342,18 @@ class DataHandlerComponent {
           const list = ingredients.join(",")
           const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${list}`)
           return await response.json()
+          .then((data) => this.paginateData(data,offset,limit))
       } catch (error) {
         console.log('Request failed', error)
       }
     }
   }
 
-  getGlassesAll = async () => {
+  getGlassesAll = async (offset=0,limit=50) => {
     if (this.dev) {
       try {
       return await this.promiseInput(getGlassesAllJSON.default)
+      .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
@@ -256,16 +361,18 @@ class DataHandlerComponent {
       try {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/list.php?g=list')
       return await response.json()
+      .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
     }
   }
 
-  getCategoriesAll = async () => {
+  getCategoriesAll = async (offset=0,limit=50) => {
     if (this.dev) {
       try {
       return await this.promiseInput(getCategoriesAllJSON.default)
+      .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
@@ -273,6 +380,7 @@ class DataHandlerComponent {
       try {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/list.php?c=list')
       return await response.json()
+      .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
       console.log('Request failed', error)
     }
