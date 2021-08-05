@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { withRouter } from "react-router-dom";
 import DataHandlerComponent from '../DataHandlerComponent';
 import './DrinkComponent.css'
+import RelatedDrinks from "./RelatedDrinks";
 
 const DrinkComponent = (props) => {
 
@@ -21,7 +22,6 @@ const DrinkComponent = (props) => {
   const DrinkDetailsPage = (props) => {
 
       var ingredients = []
-
       for(let i = 1; i <= 15; i++) {
         if(props.drink[`strIngredient${i}`] == null || props.drink[`strMeasure${i}`] == null) {
           break;
@@ -30,6 +30,7 @@ const DrinkComponent = (props) => {
       }
 
       return(
+        <>
         <div className="details-container">
           <div className="details-image">
             <img src={props.drink.strDrinkThumb}></img>
@@ -47,6 +48,8 @@ const DrinkComponent = (props) => {
             </div>
           </div>
         </div>
+        <RelatedDrinks drink={props.drink}/>
+        </>
       )
   }
 
