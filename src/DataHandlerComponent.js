@@ -33,6 +33,7 @@ import * as drink11021JSON from './mockData/drinks/11021.json';
 import * as drink11022JSON from './mockData/drinks/11022.json';
 
 
+
 //Runs the requsted API and returns a promise with the data
 class DataHandlerComponent {
   constructor(dev=true) {
