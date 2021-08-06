@@ -1,7 +1,8 @@
 .details-container {
     display: flex;
     flex-direction: row;
-    margin: 0 0 3em 0
+    flex-wrap: wrap;
+    margin: 1em 0 0 0
 }
 
 .details-image {
@@ -13,7 +14,7 @@
 .details-image > img {
     width: 300px;
     height: auto;
-    margin: 0 1em 0 1em 
+    margin: 0 1em 0 1em
 }
 
 .details {
@@ -85,4 +86,11 @@ td {
         flex-direction: row;
         justify-content: center;
     }
-}    
+    .drink-preview {
+        max-width: 9em;
+    }
+
+    .drink-preview > p {
+        font-size: 12px
+    }
+}

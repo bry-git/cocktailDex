@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import DataHandlerComponent from '../DataHandlerComponent';
 import './DrinkComponent.css'
 import RelatedDrinks from "./RelatedDrinks";
+import Chip from '@material-ui/core/Chip';
 
 const DrinkComponent = (props) => {
 
@@ -19,6 +20,31 @@ const DrinkComponent = (props) => {
     }
   }, [props.match.params.drinkid]);
 
+  const displayTags = (strTags) => {
+    if (strTags) {
+    //"strTags": "IBA,ContemporaryClassic,Alcoholic,USA,Asia,Vegan,Citrus,Brunch,Hangover,Mild",
+    const arrayOfTags = strTags.split(',');
+    //break this string into an array, each element is one tag
+    // <Chip label="Basic" variant="outlined" />
+    const listOfTags = arrayOfTags.map((tag) => {
+      return (
+        <Chip label={tag} variant="outlined" />
+      )
+    })
+    //use map to return a chip jsx component for each tag
+
+    //render the array in the return
+
+    return (
+      <div><b>Tags:</b> {listOfTags}</div>
+    )
+    } else {
+      return (
+        <div><b>Tags:</b> </div>
+      )
+    }
+  }
+
   const DrinkDetailsPage = (props) => {
 
       var ingredients = []
@@ -30,15 +56,15 @@ const DrinkComponent = (props) => {
       }
 
       return(
-        <>
+        <section className="drink-page-container">
         <div className="details-container">
           <div className="details-image">
-            <img src={props.drink.strDrinkThumb}></img>
+            <img src={props.drink.strDrinkThumb} alt={props.drink.strDrink}></img>
           </div>
           <div className="details">
             <h2>{props.drink.strDrink}</h2>
             <p><b>Category: </b>{props.drink.strCategory}</p>
-            <p><b>Tags:</b> {props.drink.strTags}</p>
+            <p>{displayTags(props.drink.strTags)}</p>
             <p><b>Instructions:</b> {props.drink.strInstructions}</p>
             <div className="ingredient-container">
             <table>
@@ -49,7 +75,7 @@ const DrinkComponent = (props) => {
           </div>
         </div>
         <RelatedDrinks drink={props.drink}/>
-        </>
+        </section>
       )
   }
 

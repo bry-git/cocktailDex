@@ -7,7 +7,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import Pagination from '@material-ui/lab/Pagination';
 
 const DrinksComponent = (props) => {
@@ -15,7 +14,6 @@ const DrinksComponent = (props) => {
   const [isLoading, setIsLoading] = useState(true)
   const [page, setPage] = useState(1)
   const [pageCount, setPageCount] = useState(1)
-  const [pagination, setPagination] = useState('')
 
   //handles data load based on props.displayMode
   // {mode: 'default', query: ''}
@@ -62,13 +60,6 @@ const DrinksComponent = (props) => {
     let totalPages = Math.ceil(parseInt(data.count) / parseInt(props.displayMode.limit))
     setPageCount(totalPages)
   }, [data.count, isLoading, props.displayMode.limit]);
-
-  const handleGetByFirstLetter = (query) => {
-    props.setDisplayModeCallback({mode: 'firstletter', query: query, limit: 25, offset: 0});
-  }
-  const handleGetByIngredient  = (query) => {
-    props.setDisplayModeCallback({mode: 'mainingredient', query: [query], limit: 25, offset: 0});
-  }
 
   const handlePageChange = (event, value) => {
     console.log('page changer')
@@ -137,7 +128,7 @@ const DrinksComponent = (props) => {
             </Button> */}
           </div>
             {displayDrinks()}
-            <div className="">
+            <div className="paginationarea">
             {displayPagination()}
           </div>
         </div>

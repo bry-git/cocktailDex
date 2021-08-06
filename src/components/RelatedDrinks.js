@@ -21,13 +21,11 @@ const RelatedDrinks = (props) => {
             ingredients.push(props.drink[`strIngredient${i}`])
         }
 
-
-
         const dataHandler = new DataHandlerComponent();
         dataHandler.getDrinksByIngredients(0, 50, ingredients)
             .then((data) => setData(data))
             .then(() => setIsLoading(false))
-    }, []);
+    }, [props.drink]);
 
     return (
         <>
@@ -35,7 +33,9 @@ const RelatedDrinks = (props) => {
                 <div> Loading...</div>
             ) : (
                 <div className="related-root">
-                <h4>You may also like:</h4>
+                    <div className="details">
+                <h3>You may also like:</h3>
+                </div>
                 <div className="RelatedDrinksList">
                     {data.drinks.map((drink) => {
                         if(drink.idDrink !== props.drink.idDrink){
