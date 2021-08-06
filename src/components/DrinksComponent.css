@@ -24,6 +24,13 @@
 
 }
 
+.paginationarea {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 @media screen and (max-width: 400px) {
   .drink-preview {
       max-width: 9em;
