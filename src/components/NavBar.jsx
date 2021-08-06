@@ -61,7 +61,7 @@ const Navbar = (props) => {
         <AppBar position="static">
           <Toolbar>
             <div className="top-left">
-              <IconButton color="inherit" onClick={handleLogoClick}>
+              <IconButton color="inherit" onClick={handleLogoClick} aria-label="cocktail-home-button">
                 <LocalBarIcon />
               </IconButton>
               <Button color="inherit" className={classes.title} variant="h6" onClick={handleLogoClick}>
