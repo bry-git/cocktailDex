@@ -36,8 +36,19 @@ import * as drink11022JSON from './mockData/drinks/11022.json';
 
 //Runs the requsted API and returns a promise with the data
 class DataHandlerComponent {
-  constructor(dev=false) {
-    this.dev = dev;
+  constructor() {
+    this.dev=true
+    if (process.env.REACT_APP_MOCKAPIMODE === 'production') {
+      this.dev=false
+    }
+    this.apiBase = process.env.REACT_APP_APIURL
+    this.apiKey = process.env.REACT_APP_APIKEY
+
+    if (!this.apiBase || !this.apiKey) {
+      console.log('.env required with REACT_APP_APIURL and REACT_APP_APIKEY variables, obtain from https://www.thecocktaildb.com/')
+    }
+
+    this.apiURL = this.apiBase + this.apiKey
   }
 
   //utility function
@@ -105,7 +116,7 @@ class DataHandlerComponent {
     }
     } else {
       try {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s=')
+      const response = await fetch(`${this.apiURL}/search.php?s=`)
       return await response.json()
       .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
@@ -166,7 +177,7 @@ class DataHandlerComponent {
     }
     } else {
       try {
-      const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=${drinkID}`)
+      const response = await fetch(`${this.apiURL}/lookup.php?i=${drinkID}`)
       return await response.json()
     } catch (error) {
       console.log('Request failed', error)
@@ -184,7 +195,7 @@ class DataHandlerComponent {
     }
     } else {
       try {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/popular.php')
+      const response = await fetch(`${this.apiURL}/popular.php`)
       return await response.json()
         .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
@@ -203,7 +214,7 @@ class DataHandlerComponent {
     }
     } else {
       try {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/random.php')
+      const response = await fetch(`${this.apiURL}/random.php`)
       return await response.json()
         .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
@@ -222,7 +233,7 @@ class DataHandlerComponent {
     }
     } else {
       try {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/randomselection.php')
+      const response = await fetch(`${this.apiURL}/randomselection.php`)
       return await response.json()
       .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
@@ -244,7 +255,7 @@ class DataHandlerComponent {
     }
     } else {
       try {
-      const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/search.php?f=${letter}`)
+      const response = await fetch(`${this.apiURL}/search.php?f=${letter}`)
       return await response.json()
       .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
@@ -269,7 +280,7 @@ class DataHandlerComponent {
         if (!searchString) {
           throw new Error('expects a non empty search string')
         }
-      const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s=${searchString}`)
+      const response = await fetch(`${this.apiURL}/search.php?s=${searchString}`)
       return await response.json()
       .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
@@ -294,7 +305,7 @@ class DataHandlerComponent {
         if (!glassString) {
           throw new Error('expects a non empty search string')
         }
-      const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?g=${glassString}`)
+      const response = await fetch(`${this.apiURL}/filter.php?g=${glassString}`)
       return await response.json()
       .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
@@ -313,7 +324,7 @@ class DataHandlerComponent {
     }
     } else {
       try {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/list.php?i=list')
+      const response = await fetch(`${this.apiURL}/list.php?i=list`)
       return await response.json()
       .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
@@ -344,7 +355,7 @@ class DataHandlerComponent {
           }
 
           const list = ingredients.join(",")
-          const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${list}`)
+          const response = await fetch(`${this.apiURL}/filter.php?i=${list}`)
           return await response.json()
           .then((data) => this.paginateData(data,offset,limit))
       } catch (error) {
@@ -363,7 +374,7 @@ class DataHandlerComponent {
     }
     } else {
       try {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/list.php?g=list')
+      const response = await fetch(`${this.apiURL}/list.php?g=list`)
       return await response.json()
       .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
@@ -382,7 +393,7 @@ class DataHandlerComponent {
     }
     } else {
       try {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/list.php?c=list')
+      const response = await fetch(`${this.apiURL}/list.php?c=list`)
       return await response.json()
       .then((data) => this.paginateData(data,offset,limit))
     } catch (error) {
