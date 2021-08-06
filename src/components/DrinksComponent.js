@@ -27,11 +27,12 @@ const DrinksComponent = (props) => {
     const query = props.displayMode.query;
     const offset = props.displayMode.offset;
     const limit = props.displayMode.limit;
-    setPage(1);
+    const page = parseInt(props.displayMode.page);
+    setPage(page)
 
     switch (mode) {
       case 'default':
-        dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
+        dataHandler.getDrinksPopular(offset,limit).then((data) => setData(data)).then(() => setIsLoading(false))
         break;
       case 'search':
         if (query) {
@@ -39,7 +40,7 @@ const DrinksComponent = (props) => {
           .then((data) => setData(data))
           .then(() => setIsLoading(false))
         } else {
-          dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
+          dataHandler.getDrinksPopular(offset,limit).then((data) => setData(data)).then(() => setIsLoading(false))
         }
         break;
       case 'randomize':
@@ -52,9 +53,9 @@ const DrinksComponent = (props) => {
         dataHandler.getDrinksByIngredients(offset,limit,query).then((data) => setData(data)).then(() => setIsLoading(false))
         break;
       default:
-        dataHandler.getDrinksPopular().then((data) => setData(data)).then(() => setIsLoading(false))
+        dataHandler.getDrinksPopular(offset,limit).then((data) => setData(data)).then(() => setIsLoading(false))
     }
-  }, [props.displayMode.mode, props.displayMode.query, props.displayMode.offset, props.displayMode.limit]);
+  }, [props.displayMode.mode, props.displayMode.query, props.displayMode.offset, props.displayMode.limit, props.displayMode.page]);
 
   useEffect(() => {
     let totalPages = Math.ceil(parseInt(data.count) / parseInt(props.displayMode.limit))
@@ -66,9 +67,11 @@ const DrinksComponent = (props) => {
     let nextMode = props.displayMode;
     if (value > page && data.next.offset !== 'null') {
       nextMode.offset = data.next.offset
+      nextMode.page = page+1
     }
     if (value < page && data.previous.offset !== 'null') {
       nextMode.offset = data.previous.offset
+      nextMode.page = page-1
     }
     props.setDisplayModeCallback(nextMode);
     setPage(value);

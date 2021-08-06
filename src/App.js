@@ -10,7 +10,7 @@ import DataHandlerTestComponent from './DataHandlerTestComponent';
 function App() {
   // {mode: 'default', query: ''}
   // {mode: 'search', query: 'query'}
-  const [displayMode, setDisplayMode] = useState({mode: 'default', query: '', limit: 50, offset: 0});
+  const [displayMode, setDisplayMode] = useState({mode: 'default', query: '', limit: 15, offset: 0, page: 1});
 
   return (
     <div className="App">
