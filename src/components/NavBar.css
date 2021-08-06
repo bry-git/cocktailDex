@@ -1,12 +1,33 @@
+.top-left {
+    display: flex;
+    flex-direction: row;
+}
+
 .MuiToolbar-root {
     background-color: #3d5a80;
 }
 
 .MuiButton-root {
-    
+    color: azure;
+    background-color: #3d5a80;
+
 }
 
-.MuiFormControl-root > * {
+.MuiSelect-root {
+    /* color: azure; */
+    background-color: #3d5a80;
+}
+
+.MuiFormControl-root {
+    background-color: #3d5a80;
+}
+
+.MuiFormControl-root > .option {
+    background-color: #3d5a80;
+    color: azure;
+}
+
+.MuiFormControl-root > label{
     color: azure;
 }
 
@@ -18,3 +39,11 @@ a {
     text-decoration: none;
     color:azure
 }
+
+@media screen and (min-width: 400px) {
+        .top-left {
+            display: flex;
+            flex-direction: row;
+            margin: 0 20% 0 0
+        }
+    }

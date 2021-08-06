@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-//import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -61,54 +60,54 @@ const Navbar = (props) => {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton color="inherit" onClick={handleLogoClick}>
-              <LocalBarIcon />
-            </IconButton>
-            <Button color="inherit" className={classes.title} variant="h6" onClick={handleLogoClick}>
-              CocktailDex
-            </Button>
-            <Button color="inherit" className={classes.title} variant="h8" onClick={handleRandomizeClick}>
-              Randomize
-            </Button>
-
-            <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel htmlFor="outlined-age-native-simple">filter by</InputLabel>
-              <Select
-                native
-                value={filter}
-                onChange={(event) => {
-                  setFilter(event.target.value)
-                  handleGetByIngredient(event.target.value)
-                }}
-                label="Filter">
-                <option aria-label="None" value="" />
-                <option value={'vodka'}>Vodka</option>
-                <option value={'gin'}>Gin</option>
-                <option value={'rum'}>Rum</option>
-                <option value={'whiskey'}>Whiskey</option>
-                <option value={'burbon'}>Burbon</option>
-              </Select>
-            </FormControl>
-
-            <IconButton color="inherit" onClick={handleSearchClick}>
-              <SearchIcon />
-            </IconButton>
-            <div className={classes.search}>
-              {/* <div className={classes.searchIcon}> */}
-              {/*TODO: fix this search button in the search bar something really wrong*/}
-              {/* <SearchIcon /> */}
-              {/* </div> */}
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                onChange={handleSearchInputChange}
-                value={searchQuery}
-                inputProps={{ 'aria-label': 'search' }}
-              />
+            <div className="top-left">
+              <IconButton color="inherit" onClick={handleLogoClick}>
+                <LocalBarIcon />
+              </IconButton>
+              <Button color="inherit" className={classes.title} variant="h6" onClick={handleLogoClick}>
+                CocktailDex
+              </Button>
+              <Button color="inherit" className={classes.title} variant="h8" onClick={handleRandomizeClick}>
+                Randomize
+              </Button>
             </div>
+              <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel htmlFor="outlined-age-native-simple">filter by</InputLabel>
+                <Select
+                  native
+                  value={filter}
+                  onChange={(event) => {
+                    setFilter(event.target.value)
+                    handleGetByIngredient(event.target.value)
+                  }}
+                  label="Filter">
+                  <option className="option" aria-label="None" value="" />
+                  <option className="option" value={'vodka'}>Vodka</option>
+                  <option className="option" value={'gin'}>Gin</option>
+                  <option className="option" value={'rum'}>Rum</option>
+                  <option className="option" value={'whiskey'}>Whiskey</option>
+                </Select>
+              </FormControl>
+
+              <IconButton color="inherit" onClick={handleSearchClick} aria-label="search-button">
+                <SearchIcon/>
+              </IconButton>
+              <div className={classes.search}>
+                {/* <div className={classes.searchIcon}> */}
+                {/*TODO: fix this search button in the search bar something really wrong*/}
+                {/* <SearchIcon /> */}
+                {/* </div> */}
+                <InputBase
+                  placeholder="Search…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  onChange={handleSearchInputChange}
+                  value={searchQuery}
+                  inputProps={{ 'aria-label': 'search' }}
+                />
+              </div>
           </Toolbar>
         </AppBar>
       </div>
