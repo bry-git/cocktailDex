@@ -61,7 +61,7 @@ class DataHandlerComponent {
   }
 
     //utility function
-  paginateData = (inputData, inputOffset=0, inputLimit=50) => {
+  paginateData = (inputData, inputOffset=0, inputLimit=15) => {
 
     if (inputOffset < 0 || isNaN(inputOffset) || inputLimit < 0 || isNaN(inputLimit)) {
       throw new Error('inputoffset and inputlimit must be positive integers')

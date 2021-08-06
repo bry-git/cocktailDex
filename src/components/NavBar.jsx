@@ -28,24 +28,24 @@ const Navbar = (props) => {
   }
   const handleSearchClick = () => {
     //props.setSearchCallback(searchQuery);
-    props.setDisplayModeCallback({ mode: 'search', query: searchQuery, limit: 50, offset: 0 });
+    props.setDisplayModeCallback({ mode: 'search', query: searchQuery, limit: 15, offset: 0, page: 1});
     history.push(`/`);
   }
 
   const handleRandomizeClick = () => {
     //props.setSearchCallback('');
-    props.setDisplayModeCallback({ mode: 'randomize', query: '', limit: 50, offset: 0 });
+    props.setDisplayModeCallback({ mode: 'randomize', query: '', limit: 15, offset: 0, page: 1});
     history.push(`/`);
   }
 
   const handleLogoClick = () => {
     //props.setSearchCallback('');
-    props.setDisplayModeCallback({ mode: 'default', query: '', limit: 50, offset: 0 });
+    props.setDisplayModeCallback({ mode: 'default', query: '', limit: 15, offset: 0, page: 1});
     history.push(`/`);
   }
 
   const handleGetByIngredient = (query) => {
-    props.setDisplayModeCallback({ mode: 'mainingredient', query: [query], limit: 50, offset: 0 });
+    props.setDisplayModeCallback({ mode: 'mainingredient', query: [query], limit: 15, offset: 0, page: 1});
     history.push(`/`);
   }
 
