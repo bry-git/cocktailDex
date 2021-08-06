@@ -6,14 +6,18 @@ describe('integration tests for CocktailDex', () => {
         cy.visit('http://localhost:3000/')
     })
     it('the home page loads a navbar', () => {
-        cy.findByRole('link', {name: /CocktailDex/i})
+        cy.findByRole('button', {name: /CocktailDex/i})
+        cy.findByRole('button', {name: /Randomize/i})
+        cy.findByText(/filter by/i)
+        cy.findByLabelText(/search-button/i)
         cy.findByRole('textbox', {name: /search/i})
     })
     it('the user can search for a cocktail in the navbar', () => {
-        cy.findByRole('textbox', {name: /search/i}).type('Mojito{enter}');
+        cy.findByRole('textbox', {name: /search/i}).type('Margarita');
+        cy.findByLabelText(/search-button/i).click()
 
-        cy.findByText(/11000/i)
-        cy.findByText("Muddle mint leaves with sugar and lime juice. Add a splash of soda water and fill the glass with cracked ice. Pour the rum and top with soda water. Garnish and serve with straw.")        
+        cy.findByTestId("Margarita-preview")
+        cy.findByTestId("Blue Margarita-preview")
     })
     it('home page loads a collection of cocktails', () => {
         cy.findAllByRole('img')

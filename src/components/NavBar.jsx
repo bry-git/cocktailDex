@@ -89,8 +89,8 @@ const Navbar = (props) => {
                 </Select>
               </FormControl>
 
-              <IconButton color="inherit" onClick={handleSearchClick}>
-                <SearchIcon />
+              <IconButton color="inherit" onClick={handleSearchClick} aria-label="search-button">
+                <SearchIcon/>
               </IconButton>
               <div className={classes.search}>
                 {/* <div className={classes.searchIcon}> */}
